@@ -4,36 +4,46 @@ int main()
 {
 txCreateWindow (800, 600);
 
+    //Параметры Фона
     HDC background = txLoadImage ("Pictures/fon.bmp");
     int xFon = -1800;
     int yFon = -1200;
+/*
+    HDC manRight = txLoadImage ("Pictures/manRight.bmp");
+    HDC manLeft = txLoadImage ("Pictures/manLeft.bmp");
+    HDC man = manRight;
+    int n_kadr = 0;
+*/
 
-    HDC man = txLoadImage ("Pictures/man.bmp");
-
+    //Инициализация объекта "Космический кораблю"
     HDC spaceshipeUp = txLoadImage ("Pictures/spaceshipe_Up.bmp");
     HDC spaceshipeDown = txLoadImage ("Pictures/spaceshipe_Down.bmp");
     HDC spaceshipeLeft = txLoadImage ("Pictures/spaceshipe_Left.bmp");
     HDC spaceshipeRight = txLoadImage ("Pictures/spaceshipe_Right.bmp");
-
     HDC spaceshipe = spaceshipeUp;
     int xSpaceShip = 600;
     int ySpaceShip = 300;
 
+    //Инициализация объекта "Космонавт"
     HDC spaceman1Left = txLoadImage ("Pictures/spaceman1Left.bmp");
     HDC spaceman1Right = txLoadImage ("Pictures/spaceman1Right.bmp");
-
-
     HDC spaceman = spaceman1Left;
     int xSpaceman = 400;
     int ySpaceman = 300;
+    int y0Spaceman = 550;
 
+    //Инициализация объекта "Космонавт2"
     HDC spaceman2Left = txLoadImage ("Pictures/spacemanLeft.bmp");
     HDC spaceman2Right = txLoadImage ("Pictures/spacemanRight.bmp");
-
     HDC spaceman2 = spaceman2Right;
     int xSpaceman2 = 100;
     int ySpaceman2 = 100;
     int vxSpaceman2 = 10;
+
+    //Инициализация снаряда
+    int xBullet;
+    int yBullet;
+    bool Bullet_visible = false;
 
     while(!GetAsyncKeyState (VK_ESCAPE))
     {
@@ -42,15 +52,34 @@ txCreateWindow (800, 600);
         txSetFillColor (TX_WHITE);
         txClear();
 
+        //Рисование Фона
         txBitBlt (txDC(), xFon, yFon, 3600, 2400, background);
 
-        txTransparentBlt (txDC(), 0, 0, 1256, 204, man, 0, 0, TX_BLACK);
+/*
+        txTransparentBlt (txDC(), 0, 0, 150, 200, man, 0, 0, TX_WHITE);
 
+        if(GetAsyncKeyState ('E'))
+        {
+            txTransparentBlt (txDC(), 0, 0, 150, 200, manRight, 150*n_kadr, 0, TX_WHITE);
+            n_kadr++;
+            if (n_kadr>=8) n_kadr = 0;
+        }
+
+        if(GetAsyncKeyState ('Q'))
+        {
+            txTransparentBlt (txDC(), 0, 0, 150, 200, manLeft, 150*n_kadr, 0, TX_WHITE);
+            n_kadr++;
+            if (n_kadr>=8) n_kadr = 0;
+        }
+*/
+
+        //Пропорции космического корабля
         if(spaceshipe == spaceshipeUp || spaceshipe == spaceshipeDown)
             txTransparentBlt (txDC(), xSpaceShip, ySpaceShip, 131, 200, spaceshipe, 0, 0, TX_BLACK);
         else if(spaceshipe == spaceshipeLeft || spaceshipe == spaceshipeRight)
             txTransparentBlt (txDC(), xSpaceShip, ySpaceShip, 200, 131, spaceshipe, 0, 0, TX_BLACK);
 
+        //Управление космическим кораблём
         if(GetAsyncKeyState ('S'))
         {
             yFon -= 10;
@@ -74,14 +103,19 @@ txCreateWindow (800, 600);
 
 
         txTransparentBlt (txDC(), xSpaceman, ySpaceman, 150, 212, spaceman, 0, 0, TX_BLACK);
-        if(GetAsyncKeyState (VK_UP))
+        //Условие гравитации
+        ySpaceman +=20;
+        //Условие "земли"
+        if(ySpaceman > y0Spaceman - 212)
         {
-            ySpaceman -= 10;
+            ySpaceman = y0Spaceman-212;
         }
-        if(GetAsyncKeyState (VK_DOWN))
+        //Условие прышка
+        if(GetAsyncKeyState (VK_SPACE))
         {
-            ySpaceman += 10;
+            ySpaceman -= 80;
         }
+
         if(GetAsyncKeyState (VK_RIGHT))
         {
             xSpaceman += 10;
@@ -92,6 +126,18 @@ txCreateWindow (800, 600);
             xSpaceman -= 10;
             spaceman = spaceman1Left;
         }
+        if(Bullet_visible)
+        {
+            txCircle(xBullet, yBullet, 3);
+            xBullet 
+        }
+        if(GetAsyncKeyState (VK_CONTROL))
+        {
+            xBullet = xSpaceman;
+            yBullet = ySpaceman;
+            Bullet_visible = true;
+        }
+        
 
         txTransparentBlt (txDC(), xSpaceman2, ySpaceman2, 147, 150, spaceman2,  0, 0, TX_BLACK);
         xSpaceman2 = xSpaceman2 + vxSpaceman2;
