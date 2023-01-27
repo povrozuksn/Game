@@ -8,12 +8,10 @@ txCreateWindow (800, 600);
     HDC background = txLoadImage ("Pictures/fon.bmp");
     int xFon = -1800;
     int yFon = -1200;
-/*
-    HDC manRight = txLoadImage ("Pictures/manRight.bmp");
-    HDC manLeft = txLoadImage ("Pictures/manLeft.bmp");
-    HDC man = manRight;
+
+    HDC dragon = txLoadImage ("Pictures/dragon.bmp");
     int n_kadr = 0;
-*/
+
 
     //Инициализация объекта "Космический кораблю"
     HDC spaceshipeUp = txLoadImage ("Pictures/spaceshipe_Up.bmp");
@@ -46,6 +44,12 @@ txCreateWindow (800, 600);
     int vx = 5;
     bool Bullet_visible = false;
 
+    //Инициализация препядствия
+    int x1 = 200;
+    int x2 = 300;
+    int y1 = 400;
+    int y2 = 600;
+
     while(!GetAsyncKeyState (VK_ESCAPE))
     {
         txBegin();
@@ -56,23 +60,20 @@ txCreateWindow (800, 600);
         //Рисование Фона
         txBitBlt (txDC(), xFon, yFon, 3600, 2400, background);
 
-/*
-        txTransparentBlt (txDC(), 0, 0, 150, 200, man, 0, 0, TX_WHITE);
+        txSetColor(TX_GREEN);
+        txSetFillColor(TX_GREEN);
+        txCircle(400, 320, 25);
 
-        if(GetAsyncKeyState ('E'))
+        if(txGetPixel(xSpaceman, ySpaceman) == TX_GREEN)
         {
-            txTransparentBlt (txDC(), 0, 0, 150, 200, manRight, 150*n_kadr, 0, TX_WHITE);
-            n_kadr++;
-            if (n_kadr>=8) n_kadr = 0;
+            txTextOut(xSpaceman, ySpaceman, "Ой, зеленый");
         }
 
-        if(GetAsyncKeyState ('Q'))
-        {
-            txTransparentBlt (txDC(), 0, 0, 150, 200, manLeft, 150*n_kadr, 0, TX_WHITE);
-            n_kadr++;
-            if (n_kadr>=8) n_kadr = 0;
-        }
-*/
+
+        txTransparentBlt (txDC(), 0, 0, 200, 150, dragon, 200*n_kadr, 0, TX_WHITE);
+        n_kadr++;
+            if (n_kadr>=3) n_kadr = 0;
+
 
         //Пропорции космического корабля
         if(spaceshipe == spaceshipeUp || spaceshipe == spaceshipeDown)
@@ -127,6 +128,30 @@ txCreateWindow (800, 600);
             xSpaceman -= 10;
             spaceman = spaceman1Left;
         }
+
+
+        txSetColor(TX_WHITE);
+        txSetFillColor(TX_WHITE);
+        txRectangle(x1, y1, x2, y2);
+
+        if( xSpaceman       < x2 &&
+            xSpaceman+150   > x1 &&
+            ySpaceman       < y2 &&
+            ySpaceman+212   > y1
+            )
+        {
+            if(spaceman == spaceman1Left)
+            {
+                xSpaceman = x2;
+                ySpaceman   = y1-212;
+            }
+            else if(spaceman == spaceman1Right)
+            {
+                xSpaceman = x1-150;
+                ySpaceman   = y1-212;
+            }
+        }
+
         if(Bullet_visible)
         {
             txCircle(xBullet, yBullet, 10);
