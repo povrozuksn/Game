@@ -1,5 +1,17 @@
 #include "TXLib.h"
 
+struct Spaceman
+{
+   int x;
+   int y;
+   HDC image_left;
+   HDC image_right;
+   HDC image;
+   int vx;
+   int vy;
+};
+
+
 int main()
 {
 txCreateWindow (800, 600);
@@ -8,9 +20,6 @@ txCreateWindow (800, 600);
     HDC background = txLoadImage ("Pictures/fon.bmp");
     int xFon = -1800;
     int yFon = -1200;
-
-    HDC dragon = txLoadImage ("Pictures/dragon.bmp");
-    int n_kadr = 0;
 
 
     //Инициализация объекта "Космический кораблю"
@@ -23,20 +32,12 @@ txCreateWindow (800, 600);
     int ySpaceShip = 300;
 
     //Инициализация объекта "Космонавт"
-    HDC spaceman1Left = txLoadImage ("Pictures/spaceman1Left.bmp");
-    HDC spaceman1Right = txLoadImage ("Pictures/spaceman1Right.bmp");
-    HDC spaceman = spaceman1Left;
-    int xSpaceman = 400;
-    int ySpaceman = 300;
+    Spaceman spaceman = {400, 300,  txLoadImage ("Pictures/spaceman1Left.bmp"), txLoadImage ("Pictures/spaceman1Right.bmp"), spaceman.image_right};
+
     int y0Spaceman = 550;
 
     //Инициализация объекта "Космонавт2"
-    HDC spaceman2Left = txLoadImage ("Pictures/spacemanLeft.bmp");
-    HDC spaceman2Right = txLoadImage ("Pictures/spacemanRight.bmp");
-    HDC spaceman2 = spaceman2Right;
-    int xSpaceman2 = 100;
-    int ySpaceman2 = 100;
-    int vxSpaceman2 = 10;
+    Spaceman spaceman2 = {100, 100, txLoadImage ("Pictures/spacemanLeft.bmp"), txLoadImage ("Pictures/spacemanRight.bmp"), spaceman2.image_right, 10};
 
     //Инициализация снаряда
     int xBullet;
@@ -44,7 +45,6 @@ txCreateWindow (800, 600);
     int vx = 5;
     bool Bullet_visible = false;
 
-    //Инициализация препядствия
     int x1 = 200;
     int x2 = 300;
     int y1 = 400;
@@ -59,20 +59,6 @@ txCreateWindow (800, 600);
 
         //Рисование Фона
         txBitBlt (txDC(), xFon, yFon, 3600, 2400, background);
-
-        txSetColor(TX_GREEN);
-        txSetFillColor(TX_GREEN);
-        txCircle(400, 320, 25);
-
-        if(txGetPixel(xSpaceman, ySpaceman) == TX_GREEN)
-        {
-            txTextOut(xSpaceman, ySpaceman, "Ой, зеленый");
-        }
-
-
-        txTransparentBlt (txDC(), 0, 0, 200, 150, dragon, 200*n_kadr, 0, TX_WHITE);
-        n_kadr++;
-            if (n_kadr>=3) n_kadr = 0;
 
 
         //Пропорции космического корабля
@@ -104,29 +90,29 @@ txCreateWindow (800, 600);
         }
 
 
-        txTransparentBlt (txDC(), xSpaceman, ySpaceman, 150, 212, spaceman, 0, 0, TX_BLACK);
+        txTransparentBlt (txDC(), spaceman.x, spaceman.y, 150, 212, spaceman.image, 0, 0, TX_BLACK);
         //Условие гравитации
-        ySpaceman +=20;
+        spaceman.y +=20;
         //Условие "земли"
-        if(ySpaceman > y0Spaceman - 212)
+        if(spaceman.y > y0Spaceman - 212)
         {
-            ySpaceman = y0Spaceman-212;
+            spaceman.y = y0Spaceman-212;
         }
         //Условие прышка
         if(GetAsyncKeyState (VK_SPACE))
         {
-            ySpaceman -= 80;
+            spaceman.y -= 80;
         }
 
         if(GetAsyncKeyState (VK_RIGHT))
         {
-            xSpaceman += 10;
-            spaceman = spaceman1Right;
+            spaceman.x += 10;
+            spaceman.image = spaceman.image_right;
         }
         if(GetAsyncKeyState (VK_LEFT))
         {
-            xSpaceman -= 10;
-            spaceman = spaceman1Left;
+            spaceman.x -= 10;
+            spaceman.image = spaceman.image_left;
         }
 
 
@@ -134,21 +120,21 @@ txCreateWindow (800, 600);
         txSetFillColor(TX_WHITE);
         txRectangle(x1, y1, x2, y2);
 
-        if( xSpaceman       < x2 &&
-            xSpaceman+150   > x1 &&
-            ySpaceman       < y2 &&
-            ySpaceman+212   > y1
+        if( spaceman.x       < x2 &&
+            spaceman.x+150   > x1 &&
+            spaceman.y       < y2 &&
+            spaceman.y+212   > y1
             )
         {
-            if(spaceman == spaceman1Left)
+            if(spaceman.image == spaceman.image_left)
             {
-                xSpaceman = x2;
-                ySpaceman   = y1-212;
+                spaceman.x = x2;
+                spaceman.y   = y1-212;
             }
-            else if(spaceman == spaceman1Right)
+            else if(spaceman.image == spaceman.image_right)
             {
-                xSpaceman = x1-150;
-                ySpaceman   = y1-212;
+                spaceman.x = x1-150;
+                spaceman.y   = y1-212;
             }
         }
 
@@ -159,14 +145,14 @@ txCreateWindow (800, 600);
         }
         if(GetAsyncKeyState (VK_CONTROL))
         {
-            xBullet = xSpaceman+10;
-            yBullet = ySpaceman+70;
-            if(spaceman == spaceman1Right)
+            xBullet = spaceman.x+10;
+            yBullet = spaceman.y+70;
+            if(spaceman.image == spaceman.image_right)
             {
                 vx=vx;
             }
 
-            if(spaceman == spaceman1Left)
+            if(spaceman.image == spaceman.image_left)
             {
                 vx=-vx;
             }
@@ -175,16 +161,16 @@ txCreateWindow (800, 600);
         }
 
 
-        txTransparentBlt (txDC(), xSpaceman2, ySpaceman2, 147, 150, spaceman2,  0, 0, TX_BLACK);
-        xSpaceman2 = xSpaceman2 + vxSpaceman2;
-        if(xSpaceman2 > 800 - 147 || xSpaceman2 < 0)
+        txTransparentBlt (txDC(), spaceman2.x, spaceman2.y, 147, 150, spaceman2.image,  0, 0, TX_BLACK);
+        spaceman2.x = spaceman2.x + spaceman2.vx;
+        if(spaceman2.x > 800 - 147 || spaceman2.x < 0)
         {
-            vxSpaceman2 = - vxSpaceman2;
-            if(vxSpaceman2 > 0)
+            spaceman2.vx = - spaceman2.vx;
+            if(spaceman2.vx > 0)
             {
-                spaceman2 = spaceman2Right;
+                spaceman2.image = spaceman2.image_right;
             }
-            else spaceman2 = spaceman2Left;
+            else spaceman2.image = spaceman2.image_left;
         }
 
 
@@ -194,7 +180,8 @@ txCreateWindow (800, 600);
     }
 
     txDeleteDC (background);
-    txDeleteDC (spaceman);
+    txDeleteDC (spaceman.image);
+    txDeleteDC (spaceman2.image);
 
 txTextCursor (false);
 txDisableAutoPause ();
