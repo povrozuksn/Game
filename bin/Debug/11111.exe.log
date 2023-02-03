@@ -1090,3 +1090,81 @@ Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
 Directory:	C:\Users\root\source\repos\11111
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13678, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Прямоугольник копируемой области {0, 0, 150, 212} не полностью лежит внутри изображения-источника {0, 0, 147, 150}, функция txTransparentBlt() работать не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F42FC (32-bit), Flags: CMdRe0, Thread: 0x56DC (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00417523 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13678)
+
+# 1 0x0041D7CD in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (81):
+
+     79: 
+     80:         txTransparentBlt (txDC(), spaceman.x, spaceman.y, spaceman.w_image, spaceman.h_image, spaceman.image, 0, 0, TX_BLACK);
+=>   81:         txTransparentBlt (txDC(), spaceman2.x, spaceman2.y, spaceman.w_image, spaceman.h_image, spaceman2.image,  0, 0, TX_BLACK);
+     82: 
+     83:         bar1.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Feb  3 2023 17:29:21, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Feb 03 2023 17:29:26
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13678, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Прямоугольник копируемой области {0, 0, 150, 212} не полностью лежит внутри изображения-источника {0, 0, 147, 150}, функция txTransparentBlt() работать не будет.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F42FC (32-bit), Flags: CMdRe0, Thread: 0x56DC (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00417523 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13678)
+
+# 1 0x0041D7CD in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (81):
+
+     79: 
+     80:         txTransparentBlt (txDC(), spaceman.x, spaceman.y, spaceman.w_image, spaceman.h_image, spaceman.image, 0, 0, TX_BLACK);
+=>   81:         txTransparentBlt (txDC(), spaceman2.x, spaceman2.y, spaceman.w_image, spaceman.h_image, spaceman2.image,  0, 0, TX_BLACK);
+     82: 
+     83:         bar1.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Feb  3 2023 17:29:21, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Feb 03 2023 17:29:26
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
