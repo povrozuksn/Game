@@ -20,6 +20,7 @@ struct Barrier
     int w;
     int h;
     COLORREF color;
+    bool visible;
 
     void draw()
     {
@@ -65,10 +66,22 @@ txCreateWindow (800, 600);
     Spaceman spaceman2 = {100, 100, txLoadImage ("Pictures/spacemanLeft.bmp"),
     txLoadImage ("Pictures/spacemanRight.bmp"), spaceman2.image_right, 147, 150, 10};
 
-    Barrier bar1 = {200, 400, 100, 200, TX_WHITE};
-    Barrier bar2 = {400, 50, 50, 50, TX_GREEN};
+    Spaceman ufo = {0, 0, NULL, NULL, txLoadImage ("Pictures/ufo.bmp"), 200, 202};
+
+    Barrier bar[8];
+    bar[0] = {50, 50, 50, 50, TX_WHITE, true};
+    bar[1] = {150, 50, 50, 50, TX_GREEN, true};
+    bar[2] = {250, 50, 50, 50, TX_WHITE, true};
+    bar[3] = {350, 50, 50, 50, TX_GREEN, true};
+    bar[4] = {450, 50, 50, 50, TX_WHITE, true};
+    bar[5] = {550, 50, 50, 50, TX_GREEN, true};
+    bar[6] = {650, 50, 50, 50, TX_WHITE, true};
+    bar[7] = {750, 50, 50, 50, TX_GREEN, true};
 
     Bullet bul = {0, 0, false, 0, 10};
+
+
+    int n=0;
 
     while(!GetAsyncKeyState (VK_ESCAPE))
     {
@@ -82,15 +95,36 @@ txCreateWindow (800, 600);
 
         drawSpaceman(spaceman);
         drawSpaceman(spaceman2);
+        drawSpaceman(ufo);
 
-        bar1.draw();
-        bar2.draw();
+        if(ufo.x < spaceman.x || ufo.y < spaceman.y)
+        {
+            ufo.x += 1;
+            ufo.y += 1;
+        }
+
+        for(int i=0; i<8; i++)
+        {
+            if (bar[i].visible)    bar[i].draw();
+        }
 
         if(bul.visible)
         {
             bul.draw();
             bul.y -= bul.vy;
         }
+
+        for(int i=0; i<8; i++)
+        {
+            if( bul.x >  bar[i].x &&
+                bul.x <  bar[i].x + bar[i].w &&
+                bul.y >  bar[i].y &&
+                bul.y <  bar[i].y + bar[i].h)
+            {
+                bar[i].visible = false;
+            }
+        }
+
 
         //Условие гравитации
         spaceman.y +=20;
@@ -105,6 +139,10 @@ txCreateWindow (800, 600);
             spaceman.y -= 80;
         }
 
+
+
+
+
         if(GetAsyncKeyState (VK_RIGHT))
         {
             spaceman.x += 10;
@@ -117,23 +155,7 @@ txCreateWindow (800, 600);
         }
 
 
-        if( spaceman.x       < bar1.x+bar1.w &&
-            spaceman.x+150   > bar1.x &&
-            spaceman.y       < bar1.y+bar1.h &&
-            spaceman.y+212   > bar1.y
-            )
-        {
-            if(spaceman.image == spaceman.image_left)
-            {
-                spaceman.x = bar1.x+bar1.w;
-                spaceman.y   = bar1.y-212;
-            }
-            else if(spaceman.image == spaceman.image_right)
-            {
-                spaceman.x = bar1.x-150;
-                spaceman.y   = bar1.y-212;
-            }
-        }
+
 
 
         if(GetAsyncKeyState (VK_CONTROL))

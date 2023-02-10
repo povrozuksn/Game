@@ -1168,3 +1168,120 @@ Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
 Directory:	C:\Users\root\source\repos\11111
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13678, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Прямоугольник копируемой области {600, 0, 800, 150} не полностью лежит внутри изображения-источника {0, 0, 600, 150}, функция txTransparentBlt() работать не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F42FC (32-bit), Flags: CMdRe0, Thread: 0x830 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00417523 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13678)
+
+# 1 0x0041D827 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (89):
+
+     87: 
+     88: 
+=>   89:         txTransparentBlt (txDC(), 400, 0, 200, 150, txLoadImage ("Pictures/dragon.bmp"), 200*n, 0, TX_BLACK);
+     90:         n++;
+     91:         if(n>3) n=0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Feb  6 2023 17:45:40, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Feb 06 2023 17:45:45
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13657, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F42FC (32-bit), Flags: CMdRe0, Thread: 0x3988 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004173D3 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13657)
+
+# 1 0x0041D837 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (92):
+
+     90: 
+     91: 
+=>   92:         txTransparentBlt (txDC(), 0, 400, 200, 150, dragon, 200*n, 0, TX_WHITE);
+     93:         n++;
+     94:         if(n>2) n=0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Feb 10 2023 16:33:22, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Feb 10 2023 16:33:27
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13657, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F42FC (32-bit), Flags: CMdRe0, Thread: 0x3988 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004173D3 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13657)
+
+# 1 0x0041D837 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (92):
+
+     90: 
+     91: 
+=>   92:         txTransparentBlt (txDC(), 0, 400, 200, 150, dragon, 200*n, 0, TX_WHITE);
+     93:         n++;
+     94:         if(n>2) n=0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Feb 10 2023 16:33:22, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Feb 10 2023 16:33:27
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
