@@ -60,8 +60,11 @@ txCreateWindow (800, 600);
     int yFon = -1200;
     int y0Spaceman = 550;
 
-    Spaceman spaceman = {400, 300,  txLoadImage ("Pictures/spaceman1Left.bmp"),
+    Spaceman spaceman = {100, 300,  txLoadImage ("Pictures/spaceman1Left.bmp"),
     txLoadImage ("Pictures/spaceman1Right.bmp"), spaceman.image_right, 150, 212};
+    int spacemanX_old = 0;
+    int spacemanY_old = 0;
+
 
     Spaceman spaceman2 = {100, 100, txLoadImage ("Pictures/spacemanLeft.bmp"),
     txLoadImage ("Pictures/spacemanRight.bmp"), spaceman2.image_right, 147, 150, 10};
@@ -77,6 +80,9 @@ txCreateWindow (800, 600);
     bar[5] = {550, 50, 50, 50, TX_GREEN, true};
     bar[6] = {650, 50, 50, 50, TX_WHITE, true};
     bar[7] = {750, 50, 50, 50, TX_GREEN, true};
+
+    Barrier level = {300, 300, 100, 200, TX_RED, true};
+    Barrier level1 = {500, 300, 100, 200, TX_GREEN, true};
 
     Bullet bul = {0, 0, false, 0, 10};
 
@@ -95,7 +101,50 @@ txCreateWindow (800, 600);
 
         drawSpaceman(spaceman);
         drawSpaceman(spaceman2);
-        drawSpaceman(ufo);
+        //drawSpaceman(ufo);
+        level.draw();
+        level1.draw();
+
+        spacemanX_old = spaceman.x;
+        spacemanY_old = spaceman.y;
+
+        if(GetAsyncKeyState (VK_RIGHT))
+        {
+            spaceman.x += 10;
+            spaceman.image = spaceman.image_right;
+        }
+        if(GetAsyncKeyState (VK_LEFT))
+        {
+            spaceman.x -= 10;
+            spaceman.image = spaceman.image_left;
+        }
+        /*
+        if(GetAsyncKeyState (VK_UP))
+        {
+            spaceman.y -= 10;
+        }
+        if(GetAsyncKeyState (VK_DOWN))
+        {
+            spaceman.y += 10;
+        }
+        */
+
+        if( (spaceman.x < level.x+level.w) &&
+            (spaceman.x+spaceman.w_image > level.x) &&
+            (spaceman.y < level.y+level.h) &&
+            (spaceman.y+spaceman.h_image > level.y))
+        {
+            spaceman.x = spacemanX_old;
+            spaceman.y = spacemanY_old;
+        }
+
+
+        if( txGetPixel(spaceman.x, spaceman.y) == TX_GREEN)
+        {
+            spaceman.x = spacemanX_old;
+            spaceman.y = spacemanY_old;
+        }
+
 
         if(ufo.x < spaceman.x || ufo.y < spaceman.y)
         {
@@ -114,6 +163,7 @@ txCreateWindow (800, 600);
             bul.y -= bul.vy;
         }
 
+
         for(int i=0; i<8; i++)
         {
             if( bul.x >  bar[i].x &&
@@ -125,9 +175,15 @@ txCreateWindow (800, 600);
             }
         }
 
+        if(GetAsyncKeyState (VK_CONTROL))
+        {
+            bul.x = spaceman.x+10;
+            bul.y = spaceman.y+70;
+            bul.visible = true;
+        }
 
         //Условие гравитации
-        spaceman.y +=20;
+        spaceman.y +=10;
         //Условие "земли"
         if(spaceman.y > y0Spaceman - 212)
         {
@@ -136,34 +192,14 @@ txCreateWindow (800, 600);
         //Условие прышка
         if(GetAsyncKeyState (VK_SPACE))
         {
-            spaceman.y -= 80;
+            spaceman.y -= 50;
         }
 
 
 
 
 
-        if(GetAsyncKeyState (VK_RIGHT))
-        {
-            spaceman.x += 10;
-            spaceman.image = spaceman.image_right;
-        }
-        if(GetAsyncKeyState (VK_LEFT))
-        {
-            spaceman.x -= 10;
-            spaceman.image = spaceman.image_left;
-        }
 
-
-
-
-
-        if(GetAsyncKeyState (VK_CONTROL))
-        {
-            bul.x = spaceman.x+10;
-            bul.y = spaceman.y+70;
-            bul.visible = true;
-        }
 
 
         spaceman2.x = spaceman2.x + spaceman2.vx;
