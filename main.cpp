@@ -213,6 +213,26 @@ txCreateWindow (800, 600);
             else spaceman2.image = spaceman2.image_left;
         }
 
+        if(spaceman2.image == spaceman2.image_right)
+        {
+            txSetColor(TX_WHITE);
+            txSetFillColor(TX_TRANSPARENT);
+            txDrawText(300, 10, 500, 50, "Движение вправо");
+            txRectangle(300, 10, 500, 50);
+        }
+        else
+        {
+            txSetColor(TX_WHITE);
+            txSetFillColor(TX_TRANSPARENT);
+            txDrawText(300, 10, 500, 50, "Движение влево");
+            txRectangle(300, 10, 500, 50);
+        }
+
+        char str[10];
+        sprintf(str, "x = %d", spaceman.x);
+        txSetColor(TX_WHITE);
+        txTextOut(10,10,str);
+
 
         txEnd();
         txSleep(10);
