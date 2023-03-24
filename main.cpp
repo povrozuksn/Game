@@ -62,51 +62,61 @@ txCreateWindow (800, 600);
 
     Spaceman spaceman = {100, 300,  txLoadImage ("Pictures/spaceman1Left.bmp"),
     txLoadImage ("Pictures/spaceman1Right.bmp"), spaceman.image_right, 150, 212};
-    int spacemanX_old = 0;
-    int spacemanY_old = 0;
 
+    int count_bar = 5;
+    Barrier bar[count_bar];
+    bar[0] = { 50, 50, 50, 50, TX_WHITE, true};
+    for(int i=1; i<=count_bar; i++)
+    {
+        bar[i] = {bar[i-1].x+150, 50, 50, 50, TX_WHITE, true};
+    }
 
-    Spaceman spaceman2 = {100, 100, txLoadImage ("Pictures/spacemanLeft.bmp"),
-    txLoadImage ("Pictures/spacemanRight.bmp"), spaceman2.image_right, 147, 150, 10};
-
-    Spaceman ufo = {0, 0, NULL, NULL, txLoadImage ("Pictures/ufo.bmp"), 200, 202};
-
-    Barrier bar[8];
-    bar[0] = {50, 50, 50, 50, TX_WHITE, true};
-    bar[1] = {150, 50, 50, 50, TX_GREEN, true};
-    bar[2] = {250, 50, 50, 50, TX_WHITE, true};
-    bar[3] = {350, 50, 50, 50, TX_GREEN, true};
-    bar[4] = {450, 50, 50, 50, TX_WHITE, true};
-    bar[5] = {550, 50, 50, 50, TX_GREEN, true};
-    bar[6] = {650, 50, 50, 50, TX_WHITE, true};
-    bar[7] = {750, 50, 50, 50, TX_GREEN, true};
-
-    Barrier level = {300, 300, 100, 200, TX_RED, true};
-    Barrier level1 = {500, 300, 100, 200, TX_GREEN, true};
-
-    Bullet bul = {0, 0, false, 0, 10};
-
+    int bull_count = 1;
+    Bullet bul[bull_count];
 
     int n=0;
+
+    int level = 1;
 
     while(!GetAsyncKeyState (VK_ESCAPE))
     {
         txBegin();
         txSetColor (TX_WHITE);
         txSetFillColor (TX_WHITE);
-        txClear();
+        //txClear();
 
         //Рисование
         txBitBlt (txDC(), xFon, yFon, 3600, 2400, background);
 
         drawSpaceman(spaceman);
-        drawSpaceman(spaceman2);
-        //drawSpaceman(ufo);
-        level.draw();
-        level1.draw();
 
-        spacemanX_old = spaceman.x;
-        spacemanY_old = spaceman.y;
+        txSetColor(TX_GREEN, 3);
+        txSetFillColor(TX_WHITE);
+        txRectangle(650, 5, 750, 35);
+        txDrawText(650, 5, 750, 35, "старт");
+
+        if( txMouseX() > 650 &&
+            txMouseX() < 750 &&
+            txMouseY() > 5   &&
+            txMouseY() < 35  )
+        {
+            txSetColor(TX_WHITE, 3);
+            txSetFillColor(TX_GREEN);
+            txRectangle(650, 5, 750, 35);
+            txDrawText(650, 5, 750, 35, "старт");
+        }
+        if( txMouseButtons() == 1 &&
+            txMouseX() > 650 &&
+            txMouseX() < 750 &&
+            txMouseY() > 5   &&
+            txMouseY() < 35  )
+        {
+            txSetColor(TX_WHITE, 3);
+            txSetFillColor(TX_RED);
+            txRectangle(650, 5, 750, 35);
+            txDrawText(650, 5, 750, 35, "START");
+            background = txLoadImage ("Pictures/fon2.bmp");
+        }
 
         if(GetAsyncKeyState (VK_RIGHT))
         {
@@ -118,68 +128,41 @@ txCreateWindow (800, 600);
             spaceman.x -= 10;
             spaceman.image = spaceman.image_left;
         }
-        /*
-        if(GetAsyncKeyState (VK_UP))
-        {
-            spaceman.y -= 10;
-        }
-        if(GetAsyncKeyState (VK_DOWN))
-        {
-            spaceman.y += 10;
-        }
-        */
 
-        if( (spaceman.x < level.x+level.w) &&
-            (spaceman.x+spaceman.w_image > level.x) &&
-            (spaceman.y < level.y+level.h) &&
-            (spaceman.y+spaceman.h_image > level.y))
-        {
-            spaceman.x = spacemanX_old;
-            spaceman.y = spacemanY_old;
-        }
-
-
-        if( txGetPixel(spaceman.x, spaceman.y) == TX_GREEN)
-        {
-            spaceman.x = spacemanX_old;
-            spaceman.y = spacemanY_old;
-        }
-
-
-        if(ufo.x < spaceman.x || ufo.y < spaceman.y)
-        {
-            ufo.x += 1;
-            ufo.y += 1;
-        }
-
-        for(int i=0; i<8; i++)
+        for(int i=0; i<count_bar; i++)
         {
             if (bar[i].visible)    bar[i].draw();
         }
 
-        if(bul.visible)
+        if(GetAsyncKeyState (VK_CONTROL))
         {
-            bul.draw();
-            bul.y -= bul.vy;
-        }
-
-
-        for(int i=0; i<8; i++)
-        {
-            if( bul.x >  bar[i].x &&
-                bul.x <  bar[i].x + bar[i].w &&
-                bul.y >  bar[i].y &&
-                bul.y <  bar[i].y + bar[i].h)
+            for(int i=0; i<bull_count; i++)
             {
-                bar[i].visible = false;
+                bul[i] = {spaceman.x+10, spaceman.y+70-(i*10), true, 0, 10};
             }
         }
 
-        if(GetAsyncKeyState (VK_CONTROL))
+        for(int i=0; i<bull_count; i++)
         {
-            bul.x = spaceman.x+10;
-            bul.y = spaceman.y+70;
-            bul.visible = true;
+            if(bul[i].visible)
+            {
+                bul[i].x = bul[i].x + bul[0].vx;
+                bul[i].y = bul[i].y - bul[0].vy;
+                bul[i].draw();
+            }
+        }
+
+        for(int i=0; i<count_bar; i++)
+        {
+            if( bul[0].x >  bar[i].x &&
+                bul[0].x <  bar[i].x + bar[i].w &&
+                bul[0].y >  bar[i].y &&
+                bul[0].y <  bar[i].y + 15)
+            {
+                bul[i].visible = false;
+                bar[i].visible = false;
+                count_bar--;
+            }
         }
 
         //Условие гравитации
@@ -196,52 +179,30 @@ txCreateWindow (800, 600);
         }
 
 
-
-
-
-
-
-
-        spaceman2.x = spaceman2.x + spaceman2.vx;
-        if(spaceman2.x > 800 - 147 || spaceman2.x < 0)
-        {
-            spaceman2.vx = - spaceman2.vx;
-            if(spaceman2.vx > 0)
-            {
-                spaceman2.image = spaceman2.image_right;
-            }
-            else spaceman2.image = spaceman2.image_left;
-        }
-
-        if(spaceman2.image == spaceman2.image_right)
-        {
-            txSetColor(TX_WHITE);
-            txSetFillColor(TX_TRANSPARENT);
-            txDrawText(300, 10, 500, 50, "Движение вправо");
-            txRectangle(300, 10, 500, 50);
-        }
-        else
-        {
-            txSetColor(TX_WHITE);
-            txSetFillColor(TX_TRANSPARENT);
-            txDrawText(300, 10, 500, 50, "Движение влево");
-            txRectangle(300, 10, 500, 50);
-        }
-
-        char str[10];
-        sprintf(str, "x = %d", spaceman.x);
+        char str[100];
+        sprintf(str, "Уровень = %d Мишень - %d", level, count_bar);
         txSetColor(TX_WHITE);
         txTextOut(10,10,str);
 
+        if(count_bar<1)
+        {
+            level = 2;
+            background = txLoadImage ("Pictures/fon1.bmp");
+            count_bar = 10;
+            bar[0] = { 50, 50, 25, 25, TX_WHITE, true};
+            for(int i=1; i<=count_bar; i++)
+            {
+                bar[i] = {bar[i-1].x+100, 50, 25, 25, TX_WHITE, true};
+            }
+        }
 
         txEnd();
         txSleep(10);
-
     }
 
     txDeleteDC (background);
     txDeleteDC (spaceman.image);
-    txDeleteDC (spaceman2.image);
+
 
 txTextCursor (false);
 txDisableAutoPause ();
