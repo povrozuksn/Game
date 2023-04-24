@@ -1285,3 +1285,261 @@ Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
 Directory:	C:\Users\root\source\repos\11111
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13388, функция: bool {anonymous}::TX::txDrawText(double, double, double, double, const char*, unsigned int, HDC),
+
+Сообщение: Параметр y0 = 5 больше, чем y1 = 3. Текст выводиться не будет.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F52FC (32-bit), Flags: CMdRe0, Thread: 0x2EF0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0041596E in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txDrawText() at c:/codeblocks/mingw/include/txlib.h (13388)
+
+# 1 0x0041DC87 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (111):
+
+    109:         txSetFillColor(TX_WHITE);
+    110:         txRectangle(650, 5, 750, 35);
+=>  111:         txDrawText(650, 5, 750, 3, "старт");
+    112: 
+    113:         spacemanX_old = spaceman.x;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Mar 14 2023 17:16:50, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Mar 14 2023 17:16:55
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13657, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F52FC (32-bit), Flags: CMdRe0, Thread: 0x3280 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004173D3 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13657)
+
+# 1 0x0041D396 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: drawSpaceman() at C:/Users/root/source/repos/11111/main.cpp (51):
+
+     49: void drawSpaceman(Spaceman spaceman)
+     50: {
+=>   51:     txTransparentBlt (txDC(), spaceman.x,  spaceman.y,  spaceman.w_image, spaceman.h_image, spaceman.image, 0, 0, TX_BLACK);
+     52: }
+     53: 
+
+# 2 0x0041D91F in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (91):
+
+     89:         txBitBlt (txDC(), xFon, yFon, 3600, 2400, background);
+     90: 
+=>   91:         drawSpaceman(spaceman);
+     92: 
+     93:         txSetColor(TX_GREEN, 3);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Mar 20 2023 17:10:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Mar 20 2023 17:10:39
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13657, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F52FC (32-bit), Flags: CMdRe0, Thread: 0x724 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004173D3 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13657)
+
+# 1 0x0041D396 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: drawSpaceman() at C:/Users/root/source/repos/11111/main.cpp (51):
+
+     49: void drawSpaceman(Spaceman spaceman)
+     50: {
+=>   51:     txTransparentBlt (txDC(), spaceman.x,  spaceman.y,  spaceman.w_image, spaceman.h_image, spaceman.image, 0, 0, TX_BLACK);
+     52: }
+     53: 
+
+# 2 0x0041D91F in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (91):
+
+     89:         txBitBlt (txDC(), xFon, yFon, 3600, 2400, background);
+     90: 
+=>   91:         drawSpaceman(spaceman);
+     92: 
+     93:         txSetColor(TX_GREEN, 3);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Mar 20 2023 17:10:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Mar 24 2023 18:05:38
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13657, функция: bool {anonymous}::TX::txTransparentBlt(HDC, double, double, double, double, HDC, double, double, COLORREF),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F52FC (32-bit), Flags: CMdRe0, Thread: 0x52E4 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x004173D3 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txTransparentBlt() at c:/codeblocks/mingw/include/txlib.h (13657)
+
+# 1 0x0041D396 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: drawSpaceman() at C:/Users/root/source/repos/11111/main.cpp (51):
+
+     49: void drawSpaceman(Spaceman spaceman)
+     50: {
+=>   51:     txTransparentBlt (txDC(), spaceman.x,  spaceman.y,  spaceman.w_image, spaceman.h_image, spaceman.image, 0, 0, TX_BLACK);
+     52: }
+     53: 
+
+# 2 0x0041DD33 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (164):
+
+    162:             txBitBlt (txDC(), xFon, yFon, 3600, 2400, background);
+    163: 
+=>  164:             drawSpaceman(spaceman);
+    165: 
+    166:             txSetColor(TX_GREEN, 3);
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 12 2023 17:00:40, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Apr 12 2023 17:00:44
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13628, функция: bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#1: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F52FC (32-bit), Flags: CMdRe0, Thread: 0x3C0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00416F73 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txBitBlt() at c:/codeblocks/mingw/include/txlib.h (13628)
+
+# 1 0x0041DBC0 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (140):
+
+    138:         if (PAGE == "Menu")
+    139:         {
+=>  140:             txBitBlt (txDC(), 0, 0, 800, 600, background0);
+    141: 
+    142:             btn_start.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 17 2023 17:42:36, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Apr 17 2023 17:42:54
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib сообщает:
+
+Программа: C:\Users\root\source\repos\11111\bin\Debug\11111.exe, файл: c:\codeblocks\mingw\include\txlib.h, строка: 13628, функция: bool {anonymous}::TX::txBitBlt(HDC, double, double, double, double, HDC, double, double, unsigned int),
+
+Сообщение: Параметр "sourceImage" неверен. Возможно, этот холст не создан, или уже уничтожен, или не загрузилась картинка.
+
+#2: TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400], Instance: 0x004F52FC (32-bit), Flags: CMdRe0, Thread: 0x3C0 (Main), GetLastError(): 13 (Недопустимые данные). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x00416F73 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: txBitBlt() at c:/codeblocks/mingw/include/txlib.h (13628)
+
+# 1 0x0041DBC0 in C:\Users\root\source\repos\11111\bin\Debug\11111.exe: main() at C:/Users/root/source/repos/11111/main.cpp (140):
+
+    138:         if (PAGE == "Menu")
+    139:         {
+=>  140:             txBitBlt (txDC(), 0, 0, 800, 600, background0);
+    141: 
+    142:             btn_start.draw();
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 171, Date: 2021-07-19 01:45:49 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\codeblocks\mingw\include\txlib.h
+Compiled:	Apr 17 2023 17:42:36, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, Debug
+Started:	Apr 17 2023 17:42:53
+
+Run file:	C:\Users\root\source\repos\11111\bin\Debug\11111.exe
+Directory:	C:\Users\root\source\repos\11111
+
+--------------------------------------------------
